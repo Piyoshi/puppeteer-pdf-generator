@@ -1,13 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const PdfGenerationService = require('../services/pdf-generation-service');
+const SimplePdfGenerationService = require('../services/simple-pdf-generation-service');
+const ProcessHandledPdfGenerationService = require('../services/process-handled-pdf-generation-service');
 
 router.get("/", function (req, res, next) {
   res.render("sample-document", { title: "Sample Document" });
 });
-router.post('/', function(req, res, next) {
+router.post('/simple', function(req, res, next) {
     (async () => {
-        const filename = await new PdfGenerationService().generate(req);
+        const filename = await new SimplePdfGenerationService().generate(req);
+        res.send(`OK. ${filename} created.`);
+    })().catch(next);
+});
+router.post('/handled', function(req, res, next) {
+    (async () => {
+        const filename = await new ProcessHandledPdfGenerationService().generate(req);
         res.send(`OK. ${filename} created.`);
     })().catch(next);
 });

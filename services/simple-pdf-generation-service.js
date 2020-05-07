@@ -1,7 +1,8 @@
 const puppeteer = require('puppeteer');
 const path = require('path');
+const { nanoid } = require('nanoid');
 
-class PdfGenerationService {
+class SimplePdfGenerationService {
     constructor() {
         this.generationPromise = null;
     }
@@ -20,7 +21,8 @@ class PdfGenerationService {
     }
 
     async generateFromHtmlWithPuppeteer(html) {
-        const filename = 'sample-document.pdf';
+        const id = nanoid();
+        const filename = `sample-document_${id}.pdf`;
         const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
         const page = await browser.newPage();
         await page.setContent(html);
@@ -31,4 +33,4 @@ class PdfGenerationService {
     }
 }
 
-module.exports = PdfGenerationService;
+module.exports = SimplePdfGenerationService;
