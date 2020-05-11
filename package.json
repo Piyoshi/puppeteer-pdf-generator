@@ -16,5 +16,8 @@
     "nanoid": "^3.1.5",
     "pug": "2.0.0-beta11",
     "puppeteer": "^3.0.2"
+  },
+  "devDependencies": {
+    "commander": "^5.1.0"
   }
 }
