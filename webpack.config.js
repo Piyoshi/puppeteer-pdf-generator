@@ -38,11 +38,11 @@ const TerserPlugin = require('terser-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-	mode: 'development',
+  mode: 'development',
 
-	entry: {
-		script: './frontend/javascripts/entry.js'
-	},
+  entry: {
+    script: './frontend/javascripts/entry.js'
+  },
 
   devtool: 'source-map',
 
@@ -55,75 +55,67 @@ module.exports = {
     overlay: true
   },
 
-	plugins: [
-		new webpack.ProgressPlugin(),
+  plugins: [
+    new webpack.ProgressPlugin(),
     new CopyWebpackPlugin([
         { from: 'frontend/index.html' },
     ], { logLevel: 'debug' }),
-		new MiniCssExtractPlugin({ filename: 'stylesheets/style.css' })
-		// new MiniCssExtractPlugin({ filename: 'style.[chunkhash].css' })
-	],
+    new MiniCssExtractPlugin({ filename: 'stylesheets/style.css' }),
+  ],
 
   output: {
     path: path.resolve(__dirname, 'public'),
     filename: path.join('javascripts', '[name].js')
   },
 
-	module: {
-		rules: [
-			{
-				test: /.(js|jsx)$/,
-				include: [path.resolve(__dirname, 'frontend/javascripts')],
-				loader: 'babel-loader'
-			},
-			{
-				test: /.(scss|css)$/,
+  module: {
+    rules: [
+      {
+        test: /.(js|jsx)$/,
+        include: [path.resolve(__dirname, 'frontend/javascripts')],
+        loader: 'babel-loader'
+      },
+      {
+        test: /.(scss|css)$/,
 
-				use: [
-					{
-						loader: MiniCssExtractPlugin.loader
-					},
-          //{
-          //  loader: 'style-loader',
-          //  options: {
-          //    insert: 'head',
-          //    injectType: 'singletonStyleTag'
-          //  }
-          //},
-					{
-						loader: 'css-loader',
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
+          {
+            loader: 'css-loader',
 
-						options: {
-							sourceMap: true
-						}
-					},
-					{
-						loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'sass-loader',
 
-						options: {
-							sourceMap: true
-						}
-					}
-				]
-			}
-		]
-	},
+            options: {
+              sourceMap: true
+            }
+          }
+        ]
+      }
+    ]
+  },
 
-	optimization: {
-		minimizer: [new TerserPlugin()],
+  optimization: {
+    minimizer: [new TerserPlugin()],
 
-		splitChunks: {
-			cacheGroups: {
-				vendors: {
-					priority: -10,
-					test: /[\\/]node_modules[\\/]/
-				}
-			},
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          priority: -10,
+          test: /[\\/]node_modules[\\/]/
+        }
+      },
 
-			chunks: 'async',
-			minChunks: 1,
-			minSize: 30000,
-			name: true
-		}
-	}
+      chunks: 'async',
+      minChunks: 1,
+      minSize: 30000,
+      name: true
+    }
+  }
 };
