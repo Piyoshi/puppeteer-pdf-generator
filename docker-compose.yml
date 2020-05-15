@@ -1,15 +1,22 @@
 version: '3'
 services:
-  generator:
+  generator: &generator
     build:
       context: .
     working_dir: /usr/src/app
+    command: yarn dev:backend
     ports:
       - '3000:3000'
       - '9229:9229'
     volumes:
       - ./:/usr/src/app
       - node_modules:/usr/src/app/node_modules
+
+  dev-server:
+    <<: *generator
+    command: yarn dev:frontend
+    ports:
+      - '8080:8080'
 
 volumes:
   node_modules: {}

@@ -1,0 +1,5 @@
+{
+  "verbose": true,
+  "watch": ["app.js", "routes/", "services/", "views/"],
+  "ignore": ["tests/*", "tmp/*", "node_modules/*", "frontend/*"]
+}

@@ -1,2 +1,5 @@
 node_modules
 tmp
+/public/index.html
+/public/javascripts/*
+/public/stylesheets/*
