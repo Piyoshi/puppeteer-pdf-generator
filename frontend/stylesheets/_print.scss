@@ -1,0 +1,116 @@
+body {
+  padding: 0px;
+  //font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+
+  .wrapper {
+    .sheet {
+      $border-style: 1px solid #000;
+      $table-column-size: 6;
+      $normal-font-size: 12px;
+      $document-font-size: 10px;
+
+      padding: 5px 15px;
+      page-break-after: always;
+
+      &:last-child {
+        page-break-after: auto;
+      }
+
+      h1 {
+        text-align: center;
+      }
+      h2 {
+        text-align: center;
+      }
+      h3 {
+        text-align: center;
+      }
+
+      div {
+        font-size: $normal-font-size;
+      }
+      p {
+        font-size: $normal-font-size;
+      }
+
+      .information {
+        margin: 20px 0;
+        text-align: right;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        .frame {
+          margin-left: 10px;
+          width: 80px;
+
+          img.imprint {
+            object-fit: contain;
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+          }
+        }
+      }
+
+      .document {
+        text-align: center;
+
+        div {
+          font-size: $document-font-size;
+        }
+        p {
+          font-size: $document-font-size;
+        }
+
+        .table {
+          margin: 20px auto;
+          width: 85%;
+          border: $border-style;
+
+          .row {
+            display: flex;
+
+            &:not(:last-child) {
+              border-bottom: $border-style;
+            }
+
+            .col {
+              padding: auto;
+              width: 100%;
+
+              &:not(:last-child) {
+                border-right: $border-style;
+              }
+
+              &.col-1 {
+                width: calc(100% / #{$table-column-size});
+              }
+              &.col-2 {
+                width: calc(200% / #{$table-column-size});
+              }
+              &.col-3 {
+                width: calc(300% / #{$table-column-size});
+              }
+              &.col-4 {
+                width: calc(400% / #{$table-column-size});
+              }
+              &.col-5 {
+                width: calc(500% / #{$table-column-size});
+              }
+
+              .cell {
+                padding: 3px 5px;
+
+                &.high {
+                  margin: 30px auto;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

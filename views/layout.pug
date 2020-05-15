@@ -1,7 +1,12 @@
 doctype html
-html
+html(lang='ja')
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    if isRenderRawCss
+      style
+        include ../public/stylesheets/style.css
+    else
+      link(rel='stylesheet', href='/stylesheets/style.css')
+    block css
   body
     block content
