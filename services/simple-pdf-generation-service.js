@@ -3,24 +3,7 @@ const path = require('path');
 const { nanoid } = require('nanoid');
 
 class SimplePdfGenerationService {
-    constructor() {
-        this.generationPromise = null;
-    }
-
-    async generate(req) {
-        req.app.render('sample-document', { title: 'Smaple Document' }, this.generatePdf.bind(this));
-        return this.generationPromise;
-    }
-
-    generatePdf(err, html) {
-        if (err) {
-            throw new Error(`rendering error has occured. ${err.message}`);
-        }
-
-        this.generationPromise = this.generateFromHtmlWithPuppeteer(html);
-    }
-
-    async generateFromHtmlWithPuppeteer(html) {
+    static async generateFromHtmlWithPuppeteer(html) {
         const id = nanoid();
         const filename = `sample-document_${id}.pdf`;
         const browser = await puppeteer.launch({ args: ['--no-sandbox'] });

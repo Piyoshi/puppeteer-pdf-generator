@@ -45,6 +45,9 @@ RUN apt-get update && \
 RUN apt install -y fonts-ipafont-gothic fonts-ipafont-mincho fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf
 RUN rm -rf /var/lib/apt/lists/*
 
+WORKDIR /usr/src/app
+
+COPY . /usr/src/app
 RUN yarn install
 
 CMD yarn run start
